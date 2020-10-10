@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+      .game-name{
+        background-color: #EEEEEE;
+        padding: 10px;
+        font-weight: bold;
+        text-transform: capitalize;
+        text-align: center;
+      }
+      .card-wrapper{ background-color: #EEEEEE;display: flex;flex-direction: row-reverse;}
+      .card-wrapper .card-btns{padding:10px;}
+      .card-wrapper .card-btns .btn{
+        background: #72C3DC;
+        color: #fff;
+        box-shadow: 0 6px #2B8EAD;
+        cursor: pointer;
+        padding: 25px 80px;
+        display: inline-block;
+        margin: 15px 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        outline: none;
+        position: relative;
+        transition: 0.3s all;
+        border-radius: 5px;
+        border:none;
+        max-width: 200px;
+        width: 100%;
+      }
+      .card-wrapper .card-btns .btn:focus{
+        box-shadow: 0 0 #2B8EAD;
+      }
+      .card-wrapper .card-btns .btn:hover {
+        box-shadow: 0 8px #2B8EAD;
+      }
+
+      .card-wrapper .cart-nums{
+        display: flex;
+        flex-wrap: wrap;
+        width:100%;
+      }
+      .card-wrapper .cart-nums .card{
+        background: #72C3DC;
+        margin: 1px;
+        height: 100px;
+        flex: calc( 100% / 3 - 1rem);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font-weight: bold;
+        font-size: 30px;
+        color: #fff;
+      }
+      .author{
+        text-align: center;
+        background: #EEEEEE;
+        padding: 10px;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+      /* Media query */
+      @media only screen and (max-width:767px){
+        .game-name{
+          background-color: rgb(0 0 0 / 86%);
+          color:#ffffff;
+        }
+        .card-wrapper{flex-direction: column;}
+        .card-wrapper .card-btns .btn{
+          width: 40%;
+          padding: 10px 30px;
+          margin:10px 5px;
+        }
+        .card-wrapper .cart-nums .card{
+          flex:100%;
+          border-width: 0 0 0 10px;
+          border-style: solid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="game-name">Shuffle and Sort</div>
+    <div class="card-wrapper">
+      <div class="card-btns">
+        <button  id="shuffle" class="btn">shuffle</button>
+        <button id='sort' class="btn">sort</button>
+      </div>
+      <div class="cart-nums" id="seeded"></div>
+    </div>
+    <div class="author">suffle and sort by vishal singh</div>
+    <script>
+      function shuffle() {
+        var ctr = arra1.length, temp, index;
+        var seed = document.getElementById('seeded');
+      // While there are elements in the array
+          while (ctr > 0) {
+      // Pick a random index
+              index = Math.floor(Math.random() * ctr);
+      // Decrease ctr by 1
+              ctr--;
+      // And swap the last element with it
+              temp = arra1[ctr];
+              arra1[ctr] = arra1[index];
+              arra1[index] = temp;
+          }
+          //seed.innerHTML = JSON.stringify(arra1); 
+          var color=['#2B8EAD','#6F98A8','#BFBFBF','#2F454E','#72C3DC','#2B8EAD','#6F98A8','#BFBFBF','#2F454E'];
+          var stylePro = 'background-color';
+          var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+          if (viewportWidth < 767) {
+            stylePro = 'border-color';
+          } else {
+            stylePro = 'background-color'
+          }
+          var text = arra1.map(function (item, index) {
+            return `<div class="card" style="${stylePro}:${color[index]}">${item}</div> `;
+          }).join('');
+          seed.innerHTML =  text ;
+          return true;
+        }
+        document.getElementById("shuffle").addEventListener("click", shuffle);
+        var arra1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+        function sort(){
+            var seed = document.getElementById('seeded');
+            seed.innerHTML = arra1.sort();
+            var text = arra1.map(function (item, index) {
+              return `<div class="card">${item}</div> `;
+            }).join(" ");
+            seed.innerHTML = text;
+        }
+        document.getElementById("sort").addEventListener("click", sort);
+        window.onload = sort();
+    </script>
+  </body>
+</html>
